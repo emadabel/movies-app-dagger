@@ -2,9 +2,6 @@
     <string name="app_name">Movies App</string>
     <string name="error_message">No internet connection</string>
     <string name="favorites_error_message">Favorites list is empty</string>
-    <string name="error_details">Something went wrong while trying to retrieve the details</string>
-    <string name="toast_favorite_insert_message">Successfully added new favorite movie</string>
-    <string name="toast_favorite_delete_message">Successfully removed the movie from favorites list</string>
 
     <string name="content_authority">com.emadabel.popularmovies</string>
 
@@ -19,14 +16,5 @@
     <string name="pref_sort_top_rated" translatable="false">top_rated</string>
 
     <string name="desc_poster">Movie poster</string>
-    <string name="desc_rating">Rating</string>
-    <string name="desc_trail_preview">Trail preview</string>
-    <string name="desc_play_button">Play trail</string>
 
-    <string name="original_title_label">Original title:</string>
-    <string name="votes_title">Votes</string>
-    <string name="rating_of_ten">/10</string>
-    <string name="reviews_label">Review highlights</string>
-
-    <string name="dummy_text">$$$$$$$$$$$$$$$$</string>
 </resources>

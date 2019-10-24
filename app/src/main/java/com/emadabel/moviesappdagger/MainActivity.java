@@ -1,6 +1,5 @@
 package com.emadabel.moviesappdagger;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
@@ -289,8 +288,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(int movieId) {
-        Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-        intent.putExtra(DetailsActivity.EXTRA_MOVIE_ID, movieId);
-        startActivity(intent);
+//        Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+//        intent.putExtra(DetailsActivity.EXTRA_MOVIE_ID, movieId);
+//        startActivity(intent);
     }
 }

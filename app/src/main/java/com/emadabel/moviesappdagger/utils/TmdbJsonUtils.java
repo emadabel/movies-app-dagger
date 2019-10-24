@@ -14,7 +14,7 @@ import java.util.List;
 public class TmdbJsonUtils {
 
     public static List<Movie> getMoviesListFromJson(String moviesJsonStr)
-            throws JSONException{
+            throws JSONException {
 
         final String TMDB_RESULTS = "results";
         final String TMDB_ID = "id";

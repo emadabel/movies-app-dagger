@@ -10,19 +10,18 @@ import android.widget.ImageView;
 import com.emadabel.moviesappdagger.R;
 import com.emadabel.moviesappdagger.model.Movie;
 import com.emadabel.moviesappdagger.utils.NetworkUtils;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
 
     private final MovieAdapterOnClickHandler mClickHandler;
-    private final Context mContext;
+    //    private final Context mContext;
     private List<Movie> mMovieList;
 
     public MoviesAdapter(Context context, MovieAdapterOnClickHandler clickHandler) {
         mClickHandler = clickHandler;
-        mContext = context;
+//        mContext = context;
     }
 
     @Override
@@ -38,10 +37,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
         String posterUrl = NetworkUtils.buildPosterUrl(
                 mMovieList.get(position).getPosterPath());
 
-        Picasso.with(mContext).load(posterUrl)
-                .placeholder(R.drawable.ic_placeholder)
-                .error(R.drawable.ic_error)
-                .into(moviesViewHolder.mMovieImageView);
+//        Picasso.load(posterUrl)
+//                .placeholder(R.drawable.ic_placeholder)
+//                .error(R.drawable.ic_error)
+//                .into(moviesViewHolder.mMovieImageView);
     }
 
     @Override

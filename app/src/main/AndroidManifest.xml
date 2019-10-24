@@ -21,26 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.emadabel.moviesappdagger.DetailsActivity"
-            android:parentActivityName="com.emadabel.moviesappdagger.MainActivity"
-            android:theme="@style/AppTheme.DetailsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.emadabel.moviesappdagger.MainActivity" />
-        </activity>
-        <activity
-            android:name="com.emadabel.moviesappdagger.ReviewActivity"
-            android:parentActivityName="com.emadabel.moviesappdagger.DetailsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.emadabel.moviesappdagger.DetailsActivity" />
-        </activity>
 
-        <provider
-            android:name="com.emadabel.moviesappdagger.data.FavoritesProvider"
-            android:authorities="@string/content_authority"
-            android:exported="false" />
+<!--        <provider-->
+<!--            android:name="com.emadabel.moviesappdagger.data.FavoritesProvider"-->
+<!--            android:authorities="@string/content_authority"-->
+<!--            android:exported="false" />-->
     </application>
 
 </manifest>
