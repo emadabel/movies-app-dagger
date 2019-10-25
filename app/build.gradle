@@ -29,17 +29,43 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Android Support Libraries
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation "com.android.support:exifinterface:28.0.0" //conflict fix
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
-
-    implementation 'com.android.support:preference-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
 
+    // Android Shared Preferences
+    implementation 'com.android.support:preference-v7:28.0.0'
+
+    // Network Libraries: Retrofit, Okhttp3, Okhtto logging interceptor, Gson
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+
+    // Image loading
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    // Android Architecture Component: LiveData & ViewModel
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+
+    // Android Architecture Component: Room Persistance Lib
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    implementation 'android.arch.persistence.room:rxjava2:1.1.1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+
+    // Dependency Injection Library: Dagger 2 for Android
+    implementation 'com.google.dagger:dagger-android:2.25.2'
+    implementation 'com.google.dagger:dagger-android-support:2.25.2'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.25.2'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.25.2'
+
+    // View Bindings Library: v9.0.0 is most recent version that compatible with old support library
+    // next releases working with androidx. artifacts
     implementation 'com.jakewharton:butterknife:9.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
 }
