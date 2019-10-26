@@ -9,12 +9,9 @@ import com.emadabel.moviesappdagger.model.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.emadabel.moviesappdagger.data.FavoritesContract.FavoritesEntry;
-import static com.emadabel.moviesappdagger.data.FavoritesContract.FavoritesEntry.buildFavoritesUriWithMovieId;
-
 public class Utils {
 
-    public static boolean movieIsFavorite(Context context, int movieId) {
+    /*public static boolean movieIsFavorite(Context context, int movieId) {
         Cursor cursor = context.getContentResolver().query(
                 buildFavoritesUriWithMovieId(movieId),
                 null,
@@ -67,5 +64,5 @@ public class Utils {
 
         cursor.close();
         return movies;
-    }
+    }*/
 }

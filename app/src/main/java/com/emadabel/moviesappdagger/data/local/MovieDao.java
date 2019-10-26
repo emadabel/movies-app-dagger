@@ -1,4 +1,4 @@
-package com.emadabel.moviesappdagger.data;
+package com.emadabel.moviesappdagger.data.local;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;

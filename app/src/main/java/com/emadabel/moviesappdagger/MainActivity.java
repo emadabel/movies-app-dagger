@@ -23,7 +23,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.emadabel.moviesappdagger.adapters.MoviesAdapter;
-import com.emadabel.moviesappdagger.data.FavoritesContract;
 import com.emadabel.moviesappdagger.model.Movie;
 import com.emadabel.moviesappdagger.utils.NetworkUtils;
 import com.emadabel.moviesappdagger.utils.TmdbJsonUtils;
