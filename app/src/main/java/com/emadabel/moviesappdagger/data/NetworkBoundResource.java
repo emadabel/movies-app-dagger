@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public abstract class NetworkBoundResource<ResultType, RequestType> {
@@ -24,8 +25,22 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
                                 .map(data -> Resource.error(t.getMessage(), data));
                     })
                     .observeOn(AndroidSchedulers.mainThread());
-
+        } else {
+            source = loadFromDb()
+                    .toObservable()
+                    .map(Resource::success);
         }
+
+        mResult = Observable.concat(
+                loadFromDb()
+                        .toObservable()
+                        .map(Resource::loading)
+                        .take(1),
+                source);
+    }
+
+    public Observable<Resource<ResultType>> getAsObservable() {
+        return mResult;
     }
 
     protected void onFetchFaild() {}
