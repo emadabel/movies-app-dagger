@@ -2,6 +2,8 @@ package com.emadabel.moviesappdagger.di;
 
 import android.app.Application;
 
+import com.emadabel.moviesappdagger.AppController;
+
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;

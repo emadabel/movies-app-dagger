@@ -215,19 +215,19 @@ public class MainActivity extends AppCompatActivity implements
                         break;
 
                     case FAVORITES_LOADER_ID:
-                        Uri favoritesQueryUri = FavoritesContract.FavoritesEntry.CONTENT_URI;
-
-                        Cursor cursor = getContentResolver().query(
-                                favoritesQueryUri,
-                                null,
-                                null,
-                                null,
-                                null);
-
-                        if (cursor != null) {
-                            return Utils.cursorToMovies(cursor);
-                        }
-                        break;
+//                        Uri favoritesQueryUri = FavoritesContract.FavoritesEntry.CONTENT_URI;
+//
+//                        Cursor cursor = getContentResolver().query(
+//                                favoritesQueryUri,
+//                                null,
+//                                null,
+//                                null,
+//                                null);
+//
+//                        if (cursor != null) {
+//                            return Utils.cursorToMovies(cursor);
+//                        }
+//                        break;
 
                     default:
                         throw new RuntimeException("Loader Not Implemented: " + loaderId);
