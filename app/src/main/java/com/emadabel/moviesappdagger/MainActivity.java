@@ -47,9 +47,6 @@ import dagger.android.AndroidInjection;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int TMDB_LOADER_ID = 110;
-    private static final int FAVORITES_LOADER_ID = 120;
-
     private static final String SPINNER_STATE_KEY = "spinner_state_key";
     private static final String MOVIES_LIST_KEY = "movies_list_key";
 
@@ -89,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-        moviesAdapter = new MoviesAdapter(this, null);
+        moviesAdapter = new MoviesAdapter();
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
 
