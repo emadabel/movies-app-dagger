@@ -28,7 +28,7 @@ public class MovieListViewModel extends ViewModel {
                 .subscribe(resource -> getMoviesLiveData().postValue(resource));
     }
 
-    private MutableLiveData<Resource<List<MovieEntity>>> getMoviesLiveData() {
+    public MutableLiveData<Resource<List<MovieEntity>>> getMoviesLiveData() {
         return moviesLiveData;
     }
 }

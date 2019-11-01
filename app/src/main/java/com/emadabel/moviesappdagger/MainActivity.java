@@ -1,9 +1,12 @@
 package com.emadabel.moviesappdagger;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
@@ -23,7 +26,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.emadabel.moviesappdagger.adapters.MoviesAdapter;
+import com.emadabel.moviesappdagger.data.Resource;
+import com.emadabel.moviesappdagger.data.local.MovieEntity;
 import com.emadabel.moviesappdagger.model.Movie;
+import com.emadabel.moviesappdagger.ui.MovieListViewModel;
+import com.emadabel.moviesappdagger.ui.ViewModelFactory;
 import com.emadabel.moviesappdagger.utils.NetworkUtils;
 import com.emadabel.moviesappdagger.utils.TmdbJsonUtils;
 import com.emadabel.moviesappdagger.utils.Utils;
@@ -32,18 +39,22 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 
-public class MainActivity extends AppCompatActivity implements
-        LoaderCallbacks<List<Movie>>,
-        MoviesAdapter.MovieAdapterOnClickHandler {
+public class MainActivity extends AppCompatActivity {
 
     private static final int TMDB_LOADER_ID = 110;
     private static final int FAVORITES_LOADER_ID = 120;
 
     private static final String SPINNER_STATE_KEY = "spinner_state_key";
     private static final String MOVIES_LIST_KEY = "movies_list_key";
+
+    @Inject
+    ViewModelFactory viewModelFactory;
 
     @BindView(R.id.movies_list_rv)
     RecyclerView mRecyclerView;
@@ -52,15 +63,21 @@ public class MainActivity extends AppCompatActivity implements
     @BindView(R.id.loading_indicator_pb)
     ProgressBar mLoadingIndicatorPb;
 
+    private MovieListViewModel movieListViewModel;
+
+    private MoviesAdapter moviesAdapter;
+
     private int mSpinnerState = -1;
 
     private ArrayList<Movie> moviesList;
 
-    private MoviesAdapter moviesAdapter;
     private Spinner mSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        AndroidInjection.inject(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -72,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-        moviesAdapter = new MoviesAdapter(this, this);
+        moviesAdapter = new MoviesAdapter(this, null);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
 
@@ -85,7 +102,29 @@ public class MainActivity extends AppCompatActivity implements
             mSpinnerState = savedInstanceState.getInt(SPINNER_STATE_KEY);
         }
 
-        getSupportLoaderManager().initLoader(TMDB_LOADER_ID, null, this);
+        movieListViewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieListViewModel.class);
+        movieListViewModel.getMoviesLiveData().observe(this, resource -> {
+            if (resource.isLoading()) {
+                displayLoader();
+            } else if (!resource.mData.isEmpty()) {
+                updateMoviesList(resource.mData);
+            } else handleErrorResponse();
+        });
+
+        movieListViewModel.loadMoreMovies();
+        //getSupportLoaderManager().initLoader(TMDB_LOADER_ID, null, this);
+    }
+
+    private void handleErrorResponse() {
+
+    }
+
+    private void updateMoviesList(List<MovieEntity> movies) {
+
+    }
+
+    private void displayLoader() {
+
     }
 
     @Override
@@ -139,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements
 
                 if (pos == 2) {
                     // query
-                    getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+                    //getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                     return;
                 }
 
@@ -148,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(getString(R.string.pref_sort_key), value);
                 editor.apply();
-                getSupportLoaderManager().restartLoader(TMDB_LOADER_ID, null, MainActivity.this);
+                //getSupportLoaderManager().restartLoader(TMDB_LOADER_ID, null, MainActivity.this);
             }
 
             @Override
@@ -177,91 +216,6 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public Loader<List<Movie>> onCreateLoader(final int loaderId, final Bundle loaderArgs) {
-        return new AsyncTaskLoader<List<Movie>>(this) {
-
-            @Override
-            protected void onStartLoading() {
-                if (moviesList != null) {
-                    deliverResult(moviesList);
-                } else {
-                    mLoadingIndicatorPb.setVisibility(View.VISIBLE);
-                    mRecyclerView.setVisibility(View.INVISIBLE);
-                    forceLoad();
-                }
-            }
-
-            @Override
-            public List<Movie> loadInBackground() {
-
-                switch (loaderId) {
-                    case TMDB_LOADER_ID:
-                        URL tmdbRequestUrl = NetworkUtils.buildUrl(getSortType(), false);
-
-                        try {
-                            String jsonResponse = NetworkUtils
-                                    .getResponseFromHttpUrl(MainActivity.this, tmdbRequestUrl);
-
-                            if (TextUtils.isEmpty(jsonResponse)) {
-                                return null;
-                            }
-
-                            return TmdbJsonUtils
-                                    .getMoviesListFromJson(jsonResponse);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-
-                    case FAVORITES_LOADER_ID:
-//                        Uri favoritesQueryUri = FavoritesContract.FavoritesEntry.CONTENT_URI;
-//
-//                        Cursor cursor = getContentResolver().query(
-//                                favoritesQueryUri,
-//                                null,
-//                                null,
-//                                null,
-//                                null);
-//
-//                        if (cursor != null) {
-//                            return Utils.cursorToMovies(cursor);
-//                        }
-//                        break;
-
-                    default:
-                        throw new RuntimeException("Loader Not Implemented: " + loaderId);
-                }
-
-                return null;
-            }
-
-            @Override
-            public void deliverResult(List<Movie> data) {
-                if (data != null) moviesList = new ArrayList<>(data);
-                super.deliverResult(data);
-            }
-        };
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<Movie>> loader, List<Movie> data) {
-        mLoadingIndicatorPb.setVisibility(View.INVISIBLE);
-        moviesAdapter.setMoviesData(data);
-        if (data == null) {
-            showErrorMessage(false);
-        } else if (data.size() == 0) {
-            showErrorMessage(true);
-        } else {
-            showMoviesData();
-        }
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<Movie>> loader) {
-
-    }
-
     private String getSortType() {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(this);
@@ -285,10 +239,10 @@ public class MainActivity extends AppCompatActivity implements
         mErrorMessageTv.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void onClick(int movieId) {
+//    @Override
+//    public void onClick(int movieId) {
 //        Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
 //        intent.putExtra(DetailsActivity.EXTRA_MOVIE_ID, movieId);
 //        startActivity(intent);
-    }
+//    }
 }
