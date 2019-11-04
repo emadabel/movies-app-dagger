@@ -113,15 +113,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleErrorResponse() {
-
+        mErrorMessageTv.setText(R.string.error_message);
+        mErrorMessageTv.setVisibility(View.VISIBLE);
+        mLoadingIndicatorPb.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
     }
 
     private void updateMoviesList(List<MovieEntity> movies) {
-
+        moviesAdapter.setMoviesData(movies);
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mErrorMessageTv.setVisibility(View.INVISIBLE);
+        mLoadingIndicatorPb.setVisibility(View.INVISIBLE);
     }
 
     private void displayLoader() {
-
+        mLoadingIndicatorPb.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
+        mErrorMessageTv.setVisibility(View.INVISIBLE);
     }
 
     @Override

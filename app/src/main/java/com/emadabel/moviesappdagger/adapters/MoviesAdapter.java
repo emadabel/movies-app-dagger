@@ -14,6 +14,7 @@ import com.emadabel.moviesappdagger.model.Movie;
 import com.emadabel.moviesappdagger.utils.NetworkUtils;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder> {
@@ -25,6 +26,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MoviesView
     public MoviesAdapter() {
         //mClickHandler = clickHandler;
 //        mContext = context;
+        mMovieList = new ArrayList<>();
     }
 
     @NonNull

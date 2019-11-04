@@ -20,6 +20,7 @@ public class DbModule {
     AppDatabase provideDatabase(@NonNull Application application) {
         return Room.databaseBuilder(application,
                 AppDatabase.class, AppDatabase.getDATABASE_NAME())
+                .allowMainThreadQueries()
                 .build();
     }
 
