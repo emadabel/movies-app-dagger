@@ -1,6 +1,5 @@
 package com.emadabel.moviesappdagger;
 
-import android.app.Activity;
 import android.app.Application;
 
 import com.emadabel.moviesappdagger.di.DaggerAppComponent;

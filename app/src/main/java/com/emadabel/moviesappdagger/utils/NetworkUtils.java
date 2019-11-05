@@ -22,7 +22,7 @@ public class NetworkUtils {
     private static final String API_POPULAR_PATH = "popular";
     private static final String API_TOP_RATED_PATH = "top_rated";
 
-    private static final String API_BASE_IMAGE_URL = "http://image.tmdb.org/t/p/";
+    private static final String API_BASE_IMAGE_URL = "https://image.tmdb.org/t/p/";
     private static final String POSTER_SIZE = "w185";
 
     private static final String YOUTUBE_BASE_PREVIEW = "http://img.youtube.com/vi/";

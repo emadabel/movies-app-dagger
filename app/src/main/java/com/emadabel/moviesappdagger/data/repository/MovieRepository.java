@@ -4,10 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.emadabel.moviesappdagger.data.NetworkBoundResource;
 import com.emadabel.moviesappdagger.data.Resource;
-import com.emadabel.moviesappdagger.data.remote.MovieApiResponse;
-import com.emadabel.moviesappdagger.data.remote.MovieApiService;
 import com.emadabel.moviesappdagger.data.local.MovieDao;
 import com.emadabel.moviesappdagger.data.local.MovieEntity;
+import com.emadabel.moviesappdagger.data.remote.MovieApiResponse;
+import com.emadabel.moviesappdagger.data.remote.MovieApiService;
 
 import java.util.List;
 

@@ -19,6 +19,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Singleton
 public interface AppComponent {
 
+    void inject(AppController appController);
+
     @Component.Builder
     interface Builder {
         @BindsInstance
@@ -26,6 +28,4 @@ public interface AppComponent {
 
         AppComponent build();
     }
-
-    void inject(AppController appController);
 }

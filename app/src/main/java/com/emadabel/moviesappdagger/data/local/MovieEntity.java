@@ -24,13 +24,13 @@ public class MovieEntity implements Parcelable {
     @SerializedName("id")
     @Expose
     private Long id;
-    @SerializedName(value="header", alternate={"title", "name"})
+    @SerializedName(value = "header", alternate = {"title", "name"})
     @Expose
     private String header;
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
-    @SerializedName(value="description", alternate={"overview", "synopsis"})
+    @SerializedName(value = "description", alternate = {"overview", "synopsis"})
     private String description;
     @SerializedName("release_date")
     @Expose

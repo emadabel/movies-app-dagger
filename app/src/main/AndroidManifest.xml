@@ -22,11 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-<!--        <provider-->
-<!--            android:name="com.emadabel.moviesappdagger.data.FavoritesProvider"-->
-<!--            android:authorities="@string/content_authority"-->
-<!--            android:exported="false" />-->
     </application>
 
 </manifest>

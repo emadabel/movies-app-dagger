@@ -1,19 +1,6 @@
 <resources>
     <string name="app_name">Movies App</string>
     <string name="error_message">No internet connection</string>
-    <string name="favorites_error_message">Favorites list is empty</string>
-
-    <string name="content_authority">com.emadabel.popularmovies</string>
-
-    <string name="action_spinner">ActionBar Spinner</string>
-
-    <string name="spinner_sort_label_popular">Popular movies</string>
-    <string name="spinner_sort_label_top_rated">Top rated movies</string>
-    <string name="spinner_sort_label_favorites">Favorites</string>
-
-    <string name="pref_sort_key" translatable="false">sort</string>
-    <string name="pref_sort_popular" translatable="false">popular</string>
-    <string name="pref_sort_top_rated" translatable="false">top_rated</string>
 
     <string name="desc_poster">Movie poster</string>
 

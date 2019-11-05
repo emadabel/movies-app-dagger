@@ -43,7 +43,8 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
         return mResult;
     }
 
-    protected void onFetchFaild() {}
+    protected void onFetchFaild() {
+    }
 
     protected RequestType processResponse(Resource<RequestType> response) {
         return response.mData;
